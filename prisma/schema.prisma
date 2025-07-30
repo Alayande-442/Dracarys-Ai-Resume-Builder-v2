@@ -38,7 +38,6 @@ model Resume {
   updatedAt DateTime @updatedAt
 
 
-
   @@map("resumes")
 
 }
