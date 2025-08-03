@@ -1,0 +1,21 @@
+this file contains the steps for the app
+
+the app contains landing page
+the Resume page: contains the Resume already created or to be edited
+the editor page: contains the editor for the resume
+
+
+/*/storing the state / input data in the ResumeEditor.tsx
+
+the editor page contains the following steps:
+1. General Info
+2. Personal Info
+3. Experience
+4. Education
+5. Skills
+6. Certifications
+7. Achievements
+8. References
+9. Preview
+10. Download
+
