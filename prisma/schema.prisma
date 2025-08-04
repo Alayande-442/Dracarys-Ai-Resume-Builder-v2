@@ -38,6 +38,7 @@ model Resume {
   workExperiences WorkExperience[]
   educations Education[]
   skills String[]
+  summarys String[]
   // COMMENT to join work experiences with resume
 
 
@@ -81,4 +82,6 @@ model Education{
 
   @@map("educations")
 }
+
+
 
