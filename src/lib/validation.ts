@@ -1,4 +1,5 @@
 // COMMENT this contains our form schema's | to validate the form
+import { X } from "lucide-react";
 import { z } from "zod";
 export const optionalString = z.string().trim().optional().or(z.literal(""));
 
@@ -68,6 +69,12 @@ export const educationSchema = z.object({
     .optional(),
 });
 
+export const skillSchema = z.object({
+  skills: z.array(z.string().trim()).optional(),
+});
+
+export type skillValues = z.infer<typeof skillSchema>;
+
 export type educationValues = z.infer<typeof educationSchema>;
 
 export const resumeSchema = z.object({
@@ -75,6 +82,7 @@ export const resumeSchema = z.object({
   ...personalInfoSchema.shape,
   ...workExperienceSchema.shape,
   ...educationSchema.shape,
+  ...skillSchema.shape,
 });
 export type resumeValues = Omit<z.infer<typeof resumeSchema>, "photo"> & {
   id?: string;
