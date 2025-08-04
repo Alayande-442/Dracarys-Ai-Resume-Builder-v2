@@ -18,9 +18,11 @@ model Resume {
   id String @id @default(cuid())
   userId String
 
+  // COMMENT for general info
   title String?
   description String?
 
+  // COMMENT for personal info
   photoUrl String?
   colorHex String @default ("#000000")
   borderStyle String @default("squircle")
@@ -34,6 +36,8 @@ model Resume {
   email String?
 
   workExperiences WorkExperience[]
+  educations Education[]
+  // COMMENT to join work experiences with resume
 
 
   createdAt DateTime @default(now())
@@ -59,5 +63,21 @@ model WorkExperience{
   updatedAt DateTime @updatedAt
 
   @@map("work_experiences")
+}
+
+model Education{
+  id String @id @default(cuid())
+  degree String?
+  school String?
+  startDate DateTime?
+  endDate DateTime?
+
+  resumeId String
+
+  resume Resume @relation(fields: [resumeId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("educations")
 }
 

@@ -36,9 +36,45 @@ export const personalInfoSchema = z.object({
 
 export type personalInfoValues = z.infer<typeof personalInfoSchema>;
 
+// COMMENT validation for work experience form
+export const workExperienceSchema = z.object({
+  workExperiences: z
+    .array(
+      z.object({
+        position: optionalString,
+        company: optionalString,
+        startDate: optionalString,
+        endDate: optionalString,
+        description: optionalString,
+      }),
+    )
+    .optional(),
+});
+
+export type workExperienceValues = z.infer<typeof workExperienceSchema>;
+
+// COMMENT validation for education form
+export const educationSchema = z.object({
+  educations: z
+    .array(
+      z.object({
+        school: optionalString,
+        degree: optionalString,
+        startDate: optionalString,
+        endDate: optionalString,
+        description: optionalString,
+      }),
+    )
+    .optional(),
+});
+
+export type educationValues = z.infer<typeof educationSchema>;
+
 export const resumeSchema = z.object({
   ...generalInfoSchema.shape,
   ...personalInfoSchema.shape,
+  ...workExperienceSchema.shape,
+  ...educationSchema.shape,
 });
 export type resumeValues = Omit<z.infer<typeof resumeSchema>, "photo"> & {
   id?: string;
