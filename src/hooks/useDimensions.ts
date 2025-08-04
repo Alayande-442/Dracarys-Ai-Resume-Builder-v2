@@ -38,3 +38,5 @@ export default function useDimensions(
 
   return dimensions;
 }
+
+// this is to calculate the aspect ratio of the preview section
