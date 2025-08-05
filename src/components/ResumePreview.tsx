@@ -3,6 +3,8 @@ import { cn } from "@/lib/utils";
 import { resumeValues } from "@/lib/validation";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { format } from "date-fns";
+
 interface ResumePreviewProps {
   resumeData: resumeValues;
   className?: string;
@@ -31,6 +33,7 @@ export default function ResumePreview({
         {/* COMMENT rendering the preview here */}
         <PersonalInfoHeader resumeData={resumeData} />
         <SummarySection resumeData={resumeData} />
+        <WorkExperienceSection resumeData={resumeData} />
       </div>
     </div>
   );
@@ -97,7 +100,44 @@ function SummarySection({ resumeData }: ResumeSectionProps) {
       <hr className="border-2" />
       <div className="break-inside-avoid space-y-3">
         <p className="text-lg font-semibold">Professional Profile</p>
-        <div className="whitespace-pre-line text-sm">{summary}</div>
+        <div className="whitespace-pre-line text-xs">{summary}</div>
+      </div>
+    </>
+  );
+}
+
+// COMMENT end of summary section
+
+// COMMENT beginning of workExperience section
+
+function WorkExperienceSection({ resumeData }: ResumeSectionProps) {
+  const { workExperiences } = resumeData;
+  const workExperienceNotEmpty = workExperiences?.filter(
+    (exp) => Object.values(exp).filter(Boolean).length > 0,
+  );
+
+  if (!workExperienceNotEmpty?.length) return null;
+
+  return (
+    <>
+      <hr className="border-2" />
+      <div className="space-y-3">
+        <p className="text-lg font-semibold">Work Experience</p>
+        {workExperienceNotEmpty.map((exp, index) => (
+          <div key={index} className="break-inside-avoid space-y-1">
+            <div className="flex items-center justify-between text-sm font-semibold">
+              <span>{exp.position}</span>
+              {exp.startDate && (
+                <span>
+                  {format(exp.startDate, "MM/yyyy")} -{""}
+                  {exp.endDate ? format(exp.endDate, "MM/yyyy") : "Present"}
+                </span>
+              )}
+            </div>
+            <p className="text-xs font-semibold">{exp.company}</p>
+            <div className="whitespace-pre-line text-xs">{exp.description}</div>
+          </div>
+        ))}
       </div>
     </>
   );
