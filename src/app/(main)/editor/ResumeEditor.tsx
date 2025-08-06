@@ -9,6 +9,7 @@ import Footer from "./Footer";
 import { useState } from "react";
 import { resumeValues } from "@/lib/validation";
 import ResumePreviewSection from "./ResumePreviewSection";
+import { cn } from "@/lib/utils";
 
 export default function ResumeEditor() {
   const searchParams = useSearchParams();
@@ -17,6 +18,7 @@ export default function ResumeEditor() {
   const [resumeData, setResumeData] = useState<resumeValues>({});
   // COMMENT the resumeValues contains all the resume data from the validation data
 
+  // COMMENT to toggle btw then form section and the preview section on small screen
   const [showSmResumePreview, setShowSmResumePreview] = useState(false);
 
   const currentStep = searchParams.get("step") || steps[0].key;
@@ -41,7 +43,12 @@ export default function ResumeEditor() {
       <main className="relative h-full flex-grow">
         <div className="absolute bottom-0 top-0 flex w-full">
           {/* content */}
-          <div className="w-full space-y-6 overflow-y-auto p-3 md:w-1/2">
+          <div
+            className={cn(
+              "w-full space-y-6 overflow-y-auto p-3 md:block md:w-1/2",
+              showSmResumePreview && "hidden",
+            )}
+          >
             {/* COMMENT for the > svg */}
             <Breadcrumbs currentStep={currentStep} setCurrentStep={setStep} />
             {/* COMMENT for the form */}
@@ -56,10 +63,16 @@ export default function ResumeEditor() {
           <ResumePreviewSection
             resumeData={resumeData}
             setResumeData={setResumeData}
+            className={cn(showSmResumePreview && "flex")}
           />
         </div>
       </main>
-      <Footer currentStep={currentStep} setCurrentStep={setStep} />
+      <Footer
+        currentStep={currentStep}
+        setCurrentStep={setStep}
+        showSmResumePreview={showSmResumePreview}
+        setShowSmResumePreview={setShowSmResumePreview}
+      />
     </div>
   );
 }
