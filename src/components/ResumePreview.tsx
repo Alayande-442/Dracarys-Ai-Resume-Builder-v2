@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { format } from "date-fns";
 import { Badge } from "@/components/ui/badge";
+import { BorderStyles } from "@/app/(main)/editor/BorderStyleButton";
 
 interface ResumePreviewProps {
   resumeData: resumeValues;
@@ -80,6 +81,14 @@ function PersonalInfoHeader({ resumeData }: ResumeSectionProps) {
           width={100}
           height={100}
           className="aspect-square object-cover"
+          style={{
+            borderRadius:
+              borderStyle === BorderStyles.SQUARE
+                ? "0px"
+                : borderStyle === BorderStyles.CIRCLE
+                  ? "9999px"
+                  : "10%",
+          }}
         />
       )}
 
@@ -209,7 +218,7 @@ function EducationSection({ resumeData }: ResumeSectionProps) {
 
 // COMMENT beginning of skills section :last on the preview page
 function SkillsSection({ resumeData }: ResumeSectionProps) {
-  const { skills, colorHex } = resumeData;
+  const { skills, colorHex, borderStyle } = resumeData;
 
   if (!skills?.length) return null;
 
@@ -225,7 +234,15 @@ function SkillsSection({ resumeData }: ResumeSectionProps) {
             <Badge
               key={index}
               className="rounded-md bg-black text-white hover:bg-black"
-              style={{ backgroundColor: colorHex }}
+              style={{
+                backgroundColor: colorHex,
+                borderRadius:
+                  borderStyle === BorderStyles.SQUARE
+                    ? "0px"
+                    : borderStyle === BorderStyles.CIRCLE
+                      ? "9999px"
+                      : "8px",
+              }}
             >
               {skill}
             </Badge>

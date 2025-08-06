@@ -17,6 +17,8 @@ export default function ResumeEditor() {
   const [resumeData, setResumeData] = useState<resumeValues>({});
   // COMMENT the resumeValues contains all the resume data from the validation data
 
+  const [showSmResumePreview, setShowSmResumePreview] = useState(false);
+
   const currentStep = searchParams.get("step") || steps[0].key;
   function setStep(key: string) {
     const newSearchParams = new URLSearchParams(searchParams);

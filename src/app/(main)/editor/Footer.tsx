@@ -1,14 +1,22 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { steps } from "./steps";
+import { FileUpIcon, PenLineIcon } from "lucide-react";
 
 // COMMENT counting steps for the previous and next buttons
 interface FooterProps {
   currentStep: string;
   setCurrentStep: (step: string) => void;
+  showSmResumePreview: boolean;
+  setShowSmResumePreview: (show: boolean) => void;
 }
 
-export default function Footer({ currentStep, setCurrentStep }: FooterProps) {
+export default function Footer({
+  currentStep,
+  setCurrentStep,
+  showSmResumePreview,
+  setShowSmResumePreview,
+}: FooterProps) {
   const previousStep = steps.find(
     (_, index) => steps[index + 1]?.key === currentStep,
   );
@@ -36,6 +44,18 @@ export default function Footer({ currentStep, setCurrentStep }: FooterProps) {
             Next step
           </Button>
         </div>
+
+        <Button
+          variant="outline"
+          size="icon"
+          className="md:hidden"
+          title={
+            showSmResumePreview ? "show input form" : "show resume preview"
+          }
+          onClick={() => setShowSmResumePreview(!showSmResumePreview)}
+        >
+          {showSmResumePreview ? <PenLineIcon /> : <FileUpIcon />}
+        </Button>
 
         <div className="flex items-center gap-3">
           <Button variant="secondary" asChild>
