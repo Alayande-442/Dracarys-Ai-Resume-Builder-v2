@@ -10,6 +10,8 @@ import { useState } from "react";
 import { resumeValues } from "@/lib/validation";
 import ResumePreviewSection from "./ResumePreviewSection";
 import { cn } from "@/lib/utils";
+import useUnloadWarning from "@/hooks/useUnloadWarning";
+import useAutoSaveResume from "./useAutoSaveResume";
 
 export default function ResumeEditor() {
   const searchParams = useSearchParams();
@@ -21,6 +23,10 @@ export default function ResumeEditor() {
   // COMMENT to toggle btw then form section and the preview section on small screen
   const [showSmResumePreview, setShowSmResumePreview] = useState(false);
 
+  // COMMENT Auo save hook
+  const { isSaving, hasUnsavedChanges } = useAutoSaveResume(resumeData);
+  useUnloadWarning(hasUnsavedChanges);
+
   const currentStep = searchParams.get("step") || steps[0].key;
   function setStep(key: string) {
     const newSearchParams = new URLSearchParams(searchParams);
@@ -31,6 +37,7 @@ export default function ResumeEditor() {
   const FormComponent = steps.find(
     (step) => step.key === currentStep,
   )?.component;
+
   return (
     <div className="flex min-h-screen flex-col">
       <header className="space-y-1.5 border-b px-3 py-5 text-center">
@@ -72,6 +79,7 @@ export default function ResumeEditor() {
         setCurrentStep={setStep}
         showSmResumePreview={showSmResumePreview}
         setShowSmResumePreview={setShowSmResumePreview}
+        isSaving={isSaving}
       />
     </div>
   );

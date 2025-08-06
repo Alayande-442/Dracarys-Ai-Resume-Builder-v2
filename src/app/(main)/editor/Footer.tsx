@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { steps } from "./steps";
 import { FileUpIcon, PenLineIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 // COMMENT counting steps for the previous and next buttons
 interface FooterProps {
@@ -9,6 +10,7 @@ interface FooterProps {
   setCurrentStep: (step: string) => void;
   showSmResumePreview: boolean;
   setShowSmResumePreview: (show: boolean) => void;
+  isSaving: boolean;
 }
 
 export default function Footer({
@@ -16,6 +18,7 @@ export default function Footer({
   setCurrentStep,
   showSmResumePreview,
   setShowSmResumePreview,
+  isSaving,
 }: FooterProps) {
   const previousStep = steps.find(
     (_, index) => steps[index + 1]?.key === currentStep,
@@ -61,7 +64,14 @@ export default function Footer({
           <Button variant="secondary" asChild>
             <Link href="/resumes">Close</Link>
           </Button>
-          <p className="text-muted-foreground opacity-0">saving...</p>
+          <p
+            className={cn(
+              "text-muted-foreground opacity-0",
+              isSaving && "opacity-100",
+            )}
+          >
+            saving...
+          </p>
         </div>
       </div>
     </footer>

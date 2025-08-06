@@ -7,6 +7,12 @@ the editor page: contains the editor for the resume
 
 /*/storing the state / input data in the ResumeEditor.tsx
 
+
+key feature
+1. Drag and drop feature for the work experience and education section
+2. Auto saves features
+
+
 the editor page contains the following steps:
 1. General Info
 2. Personal Info
