@@ -7,17 +7,45 @@ import { steps } from "./steps";
 import Breadcrumbs from "./Breadcrumbs";
 import Footer from "./Footer";
 import { useState } from "react";
-import { resumeValues } from "@/lib/validation";
 import ResumePreviewSection from "./ResumePreviewSection";
-import { cn } from "@/lib/utils";
+import { cn, mapToResumeValues } from "@/lib/utils";
 import useUnloadWarning from "@/hooks/useUnloadWarning";
 import useAutoSaveResume from "./useAutoSaveResume";
+import { ResumeServerData } from "@/lib/types";
+import { ResumeValues } from "@/lib/validation";
 
-export default function ResumeEditor() {
+interface ResumeEditorProps {
+  resumeToEdit: ResumeServerData | null;
+}
+
+export default function ResumeEditor({ resumeToEdit }: ResumeEditorProps) {
   const searchParams = useSearchParams();
 
   // this part is used to store resume data / input in this editor component
-  const [resumeData, setResumeData] = useState<resumeValues>({});
+  const [resumeData, setResumeData] = useState<ResumeValues>(() => {
+    if (resumeToEdit) {
+      return mapToResumeValues(resumeToEdit);
+    }
+    // Return default values for a new resume
+    return {
+      photo: null,
+      title: '',
+      description: '',
+      firstName: '',
+      lastName: '',
+      jobTitle: '',
+      city: '',
+      country: '',
+      phone: '',
+      email: '',
+      workExperiences: [],
+      educations: [],
+      skills: [],
+      summary: '',
+      colorHex: '#000000',
+      borderStyle: 'rounded',
+    };
+  });
   // COMMENT the resumeValues contains all the resume data from the validation data
 
   // COMMENT to toggle btw then form section and the preview section on small screen

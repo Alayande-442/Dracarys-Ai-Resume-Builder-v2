@@ -1,6 +1,6 @@
 import useDimensions from "@/hooks/useDimensions";
 import { cn } from "@/lib/utils";
-import { resumeValues } from "@/lib/validation";
+import { ResumeValues } from "@/lib/validation";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { format } from "date-fns";
@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { BorderStyles } from "@/app/(main)/editor/BorderStyleButton";
 
 interface ResumePreviewProps {
-  resumeData: resumeValues;
+  resumeData: ResumeValues;
   className?: string;
 }
 
@@ -46,7 +46,7 @@ export default function ResumePreview({
 // COMMENT for visible part of the resume preview section
 
 interface ResumeSectionProps {
-  resumeData: resumeValues;
+  resumeData: ResumeValues;
 }
 
 function PersonalInfoHeader({ resumeData }: ResumeSectionProps) {

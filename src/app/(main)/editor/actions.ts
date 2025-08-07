@@ -1,13 +1,12 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { resumeSchema, resumeValues } from "@/lib/validation";
+import { resumeSchema, ResumeValues } from "@/lib/validation";
 import { auth } from "@clerk/nextjs/server";
 import { del, put } from "@vercel/blob";
-import exp from "constants";
 import path from "path";
-// COMMENT this id for server action savings
-export const saveResume = async (values: resumeValues) => {
+
+export async function saveResume(values: ResumeValues) {
   const { id } = values;
 
   console.log("received values", values);
@@ -21,8 +20,6 @@ export const saveResume = async (values: resumeValues) => {
     throw new Error("User not authenticated");
   }
 
-  //   TODO check resume count for non-premium users
-
   const existingResume = id
     ? await prisma.resume.findUnique({ where: { id, userId } })
     : null;
@@ -31,7 +28,7 @@ export const saveResume = async (values: resumeValues) => {
     throw new Error("Resume not found");
   }
 
-  let newPhotoUrl: string | null | undefined = undefined;
+  let newPhotoUrl: string | undefined | null = undefined;
 
   if (photo instanceof File) {
     if (existingResume?.photoUrl) {
@@ -52,7 +49,6 @@ export const saveResume = async (values: resumeValues) => {
 
   if (id) {
     return prisma.resume.update({
-      // COMMENT updating the resume if it exist
       where: { id },
       data: {
         ...resumeValues,
@@ -65,7 +61,6 @@ export const saveResume = async (values: resumeValues) => {
             endDate: exp.endDate ? new Date(exp.endDate) : undefined,
           })),
         },
-
         educations: {
           deleteMany: {},
           create: educations?.map((edu) => ({
@@ -74,12 +69,10 @@ export const saveResume = async (values: resumeValues) => {
             endDate: edu.endDate ? new Date(edu.endDate) : undefined,
           })),
         },
-
         updatedAt: new Date(),
       },
     });
   } else {
-    // COMMENT create a new resume if it does not exist
     return prisma.resume.create({
       data: {
         ...resumeValues,
@@ -92,7 +85,6 @@ export const saveResume = async (values: resumeValues) => {
             endDate: exp.endDate ? new Date(exp.endDate) : undefined,
           })),
         },
-
         educations: {
           create: educations?.map((edu) => ({
             ...edu,
@@ -100,10 +92,7 @@ export const saveResume = async (values: resumeValues) => {
             endDate: edu.endDate ? new Date(edu.endDate) : undefined,
           })),
         },
-
-        createdAt: new Date(),
-        updatedAt: new Date(),
       },
     });
   }
-};
+}
