@@ -1,7 +1,7 @@
 // import { Image } from "lucide-react";
 "use client";
 import Link from "next/link";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/main-logo.jpeg";
 import Image from "next/image";
 import { UserButton } from "@clerk/nextjs";
 import { CreditCard } from "lucide-react";
@@ -18,12 +18,13 @@ export default function Navbar() {
           <Image
             src={logo}
             alt="Logo"
-            width={35}
+            width={30}
             height={35}
-            className="rounded-full"
+            className="bg-transparent"
           />
           <span className="text-xl font-bold tracking-tight">
-            AI Resume Builder
+            Dr<span className="text-purple-800">a</span>c
+            <span className="text-purple-800">a</span>rys AI Resume Builder
           </span>
         </Link>
         <div className="flex items-center gap-3">

@@ -10,11 +10,13 @@ import { BorderStyles } from "@/app/(main)/editor/BorderStyleButton";
 interface ResumePreviewProps {
   resumeData: ResumeValues;
   className?: string;
+  contentRef?: React.Ref<HTMLDivElement>;
 }
 
 export default function ResumePreview({
   resumeData,
   className,
+  contentRef,
 }: ResumePreviewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { width } = useDimensions(containerRef);
@@ -31,6 +33,8 @@ export default function ResumePreview({
         style={{
           zoom: (1 / 794) * width,
         }}
+        ref={contentRef}
+        id="resumePreviewContent"
       >
         {/* COMMENT rendering the preview here */}
         <PersonalInfoHeader resumeData={resumeData} />
