@@ -48,7 +48,10 @@ export default async function page() {
 
   return (
     <main className="mx-auto w-full max-w-7xl space-y-6 px-3 py-6">
-      <Button asChild className="mx-auto flex w-fit gap-2">
+      <Button
+        asChild
+        className="duration-900 mx-auto flex w-fit gap-2 bg-gradient-to-r from-purple-950 to-purple-500 text-white shadow transition-colors ease-in-out hover:from-purple-500 hover:to-purple-950"
+      >
         <Link href="/editor">
           <PlusSquare className="size-5" />
           New resume
