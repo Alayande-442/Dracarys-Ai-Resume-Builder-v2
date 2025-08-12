@@ -70,3 +70,21 @@ model Education {
 
   @@map("educations")
 }
+
+
+// COMMENT for subscription
+model UserSubscription {
+  id        String   @id @default(cuid())
+  userId    String @unique
+  stripeCustomerId String @unique
+  stripeSubscriptionId String @unique
+  stripePriceId String
+
+  stripeCurrentPeriodEnd DateTime
+  stripeCancelAtPeriodEnd Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("user_subscriptions")
+}
+  
