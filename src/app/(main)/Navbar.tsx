@@ -1,5 +1,6 @@
 // import { Image } from "lucide-react";
 "use client";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import logo from "@/assets/main-logo.jpeg";
 import Image from "next/image";
@@ -10,7 +11,23 @@ import { dark } from "@clerk/themes";
 import { useTheme } from "next-themes";
 
 export default function Navbar() {
+  const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <header className="shadow-sm">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 p-3">
+          <div className="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-700" />
+        </div>
+      </header>
+    );
+  }
+
   return (
     <header className="shadow-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3">

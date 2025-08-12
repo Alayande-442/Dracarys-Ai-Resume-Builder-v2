@@ -1,3 +1,4 @@
+"use client";
 import {
   Dialog,
   DialogContent,
@@ -5,15 +6,48 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Check } from "lucide-react";
-import { features } from "process";
 import { Button } from "../ui/button";
+import usePremiumModal from "@/hooks/usePremiumModal";
+import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
+import { redirect } from "next/dist/server/api-utils";
+import { createCheckoutSession } from "./actions";
 
 const premiumFeatures = ["Ai tools", "Up to 3 resume for download"];
 const premiumPlusFeatures = ["Infinite resume", "Custom design"];
 
 export default function PremiumModal() {
+  const { open, setOpen } = usePremiumModal();
+
+  const { toast } = useToast();
+  const [loading, setIsLoading] = useState(false);
+
+  async function handlePremiumClick(priceId: string) {
+    try {
+      setIsLoading(true);
+      const redirectUrl = await createCheckoutSession(priceId);
+      window.location.href = redirectUrl;
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Error",
+        description: "Failed to create checkout session",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
-    <Dialog open={true}>
+    <Dialog
+      open={open}
+      onOpenChange={(open) => {
+        if (!loading) {
+          setOpen(open);
+        }
+      }}
+    >
       <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle>Dracarys AI Resume Builder premium</DialogTitle>
@@ -33,7 +67,16 @@ export default function PremiumModal() {
                 </li>
               ))}
             </ul>
-            <Button>Get premium</Button>
+            <Button
+              onClick={() =>
+                handlePremiumClick(
+                  process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_PRO_MONTHLY!,
+                )
+              }
+              disabled={loading}
+            >
+              Get premium
+            </Button>
           </div>
           <div className="border-1 mx-6" />
           <div className="flex w-1/2 flex-col space-y-5">
@@ -48,7 +91,17 @@ export default function PremiumModal() {
                 </li>
               ))}
             </ul>
-            <Button variant="premium">Get premium plus</Button>
+            <Button
+              variant="premium"
+              onClick={() =>
+                handlePremiumClick(
+                  process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_PRO_PLUS_MONTHLY!,
+                )
+              }
+              disabled={loading}
+            >
+              Get premium plus
+            </Button>
           </div>
         </div>
       </DialogContent>
