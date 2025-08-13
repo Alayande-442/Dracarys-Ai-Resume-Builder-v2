@@ -1,6 +1,8 @@
 "use server";
 
+import { canCreateResume } from "@/lib/permissions";
 import prisma from "@/lib/prisma";
+import { getUserSubscriptionLevel } from "@/lib/subscriptions";
 import { resumeSchema, ResumeValues } from "@/lib/validation";
 import { auth } from "@clerk/nextjs/server";
 import { del, put } from "@vercel/blob";
@@ -18,6 +20,21 @@ export async function saveResume(values: ResumeValues) {
 
   if (!userId) {
     throw new Error("User not authenticated");
+  }
+
+  // TODO: check quota for non premium users
+  const subscriptionLevel = await getUserSubscriptionLevel(userId);
+
+  if (!id) {
+    const resumeCount = await prisma.resume.count({
+      where: {
+        userId,
+      },
+    });
+
+    if (!canCreateResume(subscriptionLevel, resumeCount)) {
+      throw new Error("You have reached the maximum number of resumes");
+    }
   }
 
   const existingResume = id
