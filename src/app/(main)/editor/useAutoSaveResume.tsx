@@ -59,11 +59,19 @@ export default function useAutoSaveResume(resumeData: ResumeValues) {
       } catch (error) {
         setIsError(true);
         console.error(error);
+        const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+        const isCustomizationError = errorMessage.includes('customizations');
+        
         const { dismiss } = toast({
           variant: "destructive",
           description: (
             <div className="space-y-3">
-              <p>Could not save changes.</p>
+              <p>{isCustomizationError ? 'Customization not saved' : 'Could not save changes'}</p>
+              <p className="text-sm">
+                {isCustomizationError 
+                  ? 'Upgrade to Pro+ to unlock customization features.'
+                  : 'Please try again.'}
+              </p>
               <Button
                 variant="secondary"
                 onClick={() => {

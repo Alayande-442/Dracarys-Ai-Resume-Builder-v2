@@ -45,15 +45,13 @@ export async function saveResume(values: ResumeValues) {
     throw new Error("Resume not found");
   }
 
-  // COMMENT for Resume customization based on subscription level
-  const hasCustomizations =
-    (resumeValues.borderStyle &&
-      resumeValues.borderStyle !== existingResume?.borderStyle) ||
-    (resumeValues.colorHex &&
-      resumeValues.colorHex !== existingResume?.colorHex);
-
-  if (hasCustomizations && !canUseCustomizations(subscriptionLevel)) {
-    throw new Error("You do not have access to customizations");
+  // Check if user has access to customizations
+  const canCustomize = canUseCustomizations(subscriptionLevel);
+  
+  // If user doesn't have access to customizations, revert to default values
+  if (!canCustomize) {
+    resumeValues.borderStyle = existingResume?.borderStyle || undefined;
+    resumeValues.colorHex = existingResume?.colorHex || undefined;
   }
 
   let newPhotoUrl: string | undefined | null = undefined;
