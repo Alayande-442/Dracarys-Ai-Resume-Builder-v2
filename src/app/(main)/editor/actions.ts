@@ -1,6 +1,6 @@
 "use server";
 
-import { canCreateResume } from "@/lib/permissions";
+import { canCreateResume, canUseCustomizations } from "@/lib/permissions";
 import prisma from "@/lib/prisma";
 import { getUserSubscriptionLevel } from "@/lib/subscriptions";
 import { resumeSchema, ResumeValues } from "@/lib/validation";
@@ -43,6 +43,17 @@ export async function saveResume(values: ResumeValues) {
 
   if (id && !existingResume) {
     throw new Error("Resume not found");
+  }
+
+  // COMMENT for Resume customization based on subscription level
+  const hasCustomizations =
+    (resumeValues.borderStyle &&
+      resumeValues.borderStyle !== existingResume?.borderStyle) ||
+    (resumeValues.colorHex &&
+      resumeValues.colorHex !== existingResume?.colorHex);
+
+  if (hasCustomizations && !canUseCustomizations(subscriptionLevel)) {
+    throw new Error("You do not have access to customizations");
   }
 
   let newPhotoUrl: string | undefined | null = undefined;
