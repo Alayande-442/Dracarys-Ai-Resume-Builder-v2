@@ -24,7 +24,7 @@ export default function BorderStyleButton({
   const subscriptionLevel = useSubscriptionLevel();
   const premiumModal = usePremiumModal();
   function handleClick() {
-    if (!canUseCustomizations(subscriptionLevel)) {
+    if (!canUseCustomizations(subscriptionLevel, 1)) {
       premiumModal.setOpen(true);
       return;
     }

@@ -46,8 +46,8 @@ export async function saveResume(values: ResumeValues) {
   }
 
   // Check if user has access to customizations
-  const canCustomize = canUseCustomizations(subscriptionLevel);
-  
+  const canCustomize = canUseCustomizations(subscriptionLevel, 1);
+
   // If user doesn't have access to customizations, revert to default values
   if (!canCustomize) {
     resumeValues.borderStyle = existingResume?.borderStyle || undefined;

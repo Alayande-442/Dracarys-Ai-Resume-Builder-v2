@@ -21,7 +21,7 @@ export async function generateSummary(input: GenerateSummaryInput) {
 
   const subscriptionLevel = await getUserSubscriptionLevel(userId);
 
-  if (!canUseAITools(subscriptionLevel)) {
+  if (!canUseAITools(subscriptionLevel, 1)) {
     throw new Error("Upgrade to a premium plan to use AI tools");
   }
 
@@ -107,7 +107,7 @@ export async function generateWorkExperience(
 
   const subscriptionLevel = await getUserSubscriptionLevel(userId);
 
-  if (!canUseAITools(subscriptionLevel)) {
+  if (!canUseAITools(subscriptionLevel, 1)) {
     throw new Error("Upgrade to a premium plan to use AI tools");
   }
 

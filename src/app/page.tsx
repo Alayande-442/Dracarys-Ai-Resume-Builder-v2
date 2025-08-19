@@ -101,7 +101,7 @@ export default function Home() {
             className="mx-auto drop-shadow-lg md:mx-0"
           />
 
-          <h1 className="text-4xl font-extrabold leading-tight tracking-tight md:text-5xl lg:text-6xl">
+          <h1 className="text-4xl font-extrabold leading-tight tracking-tight md:text-3xl lg:text-3xl">
             Optimize Your{" "}
             <TypewriterText
               phrases={phrases}
@@ -113,7 +113,7 @@ export default function Home() {
 
           <p className="text-lg text-gray-300 md:text-xl lg:text-2xl">
             Get past ATS systems and land more interviews with our AI-powered
-            Chrome extension. Trusted by{" "}
+            Resume. Trusted by{" "}
             <span className="font-bold text-white">50,000+ professionals</span>.
           </p>
 
@@ -152,7 +152,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold md:text-4xl">Proven Results</h2>
           <p className="mt-4 text-lg text-gray-300">
             Join thousands of professionals who transformed their job search
-            with Resume.ai.
+            with Dracarys AI Resume Builder.
           </p>
           <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             <div>
@@ -184,23 +184,25 @@ export default function Home() {
           </p>
           <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
             <div className="rounded-lg bg-gray-800 p-6 shadow-lg">
-              <h3 className="text-xl font-semibold">Chrome Extension</h3>
+              <h3 className="text-xl font-semibold">Auto Resume Optimizer</h3>
               <p className="mt-2 text-gray-300">
                 Analyze job descriptions and optimize your resume in real-time
                 across all major job boards.
               </p>
             </div>
             <div className="rounded-lg bg-gray-800 p-6 shadow-lg">
-              <h3 className="text-xl font-semibold">Multi-Browser Support</h3>
+              <h3 className="text-xl font-semibold">
+                Auto Generate Work Experience
+              </h3>
               <p className="mt-2 text-gray-300">
-                Works seamlessly on Chrome, Edge, Firefox, and Opera.
+                Generate work experience based on your job history and job
+                description.
               </p>
             </div>
             <div className="rounded-lg bg-gray-800 p-6 shadow-lg">
-              <h3 className="text-xl font-semibold">API & Roch Webhooks</h3>
+              <h3 className="text-xl font-semibold">Auto Generate Skills</h3>
               <p className="mt-2 text-gray-300">
-                Integrate our optimization engine into your tools with our
-                robust API.
+                Generate skills based on your job history and job description.
               </p>
             </div>
           </div>

@@ -29,7 +29,7 @@ export default function ColorPicker({ color, onChange }: ColorPickerProps) {
           size="icon"
           title="change color"
           onClick={() => {
-            if (!canUseCustomizations(subscriptionLevel)) {
+            if (!canUseCustomizations(subscriptionLevel, 1)) {
               premiumModal.setOpen(true);
               return;
             }
