@@ -1,7 +1,6 @@
 "use client";
 
 import { SubscriptionLevel } from "@/lib/subscriptions";
-import { error } from "console";
 import { createContext, ReactNode, useContext } from "react";
 
 const SubScriptionLevelContext = createContext<SubscriptionLevel | undefined>(

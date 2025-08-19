@@ -13,9 +13,9 @@ export default function Page() {
       </p>
 
       <p>
-        Welcome to Dracarys Resume Builder AI. These Terms of Service ("Terms")
+        Welcome to Dracarys Resume Builder AI. These Terms of Service (&quot;Terms&quot;)
         govern your access to and use of our website, applications, and services
-        (collectively, the “Service”). By accessing or using the Service, you
+        (collectively, the &quot;Service&quot;). By accessing or using the Service, you
         agree to be bound by these Terms. If you do not agree to them, you may
         not use the Service.
       </p>
@@ -24,8 +24,8 @@ export default function Page() {
       <p>
         Dracarys Resume Builder AI is a web-based platform designed to help
         users create resumes using artificial intelligence. The Service is
-        available through both a free tier and paid subscription plans ("Paid
-        Plans"). Payment processing is securely handled by Stripe, our
+        available through both a free tier and paid subscription plans (&quot;Paid
+        Plans&quot;). Payment processing is securely handled by Stripe, our
         third-party provider.
       </p>
 

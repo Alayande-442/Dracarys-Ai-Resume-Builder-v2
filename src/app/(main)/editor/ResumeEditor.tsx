@@ -1,7 +1,7 @@
 "use client";
 
 // import GeneralInfoForm from "./forms/GeneralInfoForm";
-import PersonalInfoForm from "./forms/PersonalInfoForm";
+// import PersonalInfoForm from "./forms/PersonalInfoForm";
 import { useSearchParams } from "next/navigation";
 import { steps } from "./steps";
 import Breadcrumbs from "./Breadcrumbs";

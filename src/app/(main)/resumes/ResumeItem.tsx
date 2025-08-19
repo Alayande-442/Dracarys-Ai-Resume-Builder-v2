@@ -156,6 +156,7 @@ function DeleteConfirmationDialog({
         });
         onOpenChange(false);
       } catch (error) {
+        console.error('Error deleting resume:', error);
         toast({
           title: "Error deleting resume",
           description: "Something went wrong while deleting your resume.",

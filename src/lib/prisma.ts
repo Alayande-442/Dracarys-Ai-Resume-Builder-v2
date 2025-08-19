@@ -5,15 +5,23 @@ const prismaClientSingleton = () => {
   return new PrismaClient();
 };
 
+// PrismaClient is attached to the `global` object in development to prevent
+// exhausting your database connection limit.
+// Learn more: https://pris.ly/d/help/next-js-best-practices
+
 declare global {
-  // This extends the NodeJS global object type
+  // eslint-disable-next-line no-var
   var prismaGlobal: PrismaClient | undefined;
 }
 
-const prisma = global.prismaGlobal ?? prismaClientSingleton();
+const globalForPrisma = global as unknown as {
+  prismaGlobal: PrismaClient | undefined;
+};
+
+const prisma = globalForPrisma.prismaGlobal ?? prismaClientSingleton();
 
 if (process.env.NODE_ENV !== "production") {
-  global.prismaGlobal = prisma;
+  globalForPrisma.prismaGlobal = prisma;
 }
 
 export default prisma;
