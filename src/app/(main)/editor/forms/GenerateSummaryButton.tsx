@@ -24,7 +24,7 @@ export default function GenerateSummaryButton({
   const [loading, setIsloading] = useState(false);
 
   async function handleClick() {
-    if (!canUseAITools(subscriptionLevel)) {
+    if (!canUseAITools(subscriptionLevel, 1)) {
       premiumModal.setOpen(true);
       return;
     }
