@@ -86,9 +86,9 @@ export default function Home() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-gray-900 text-white overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden bg-gray-900 text-white">
       {/* Hero Section */}
-      <main className="relative flex min-h-screen flex-col items-center justify-center px-6 py-16 text-center md:flex-row md:text-left lg:gap-16 bg-gray-900/50 backdrop-blur-sm">
+      <main className="relative flex min-h-screen flex-col items-center justify-center bg-gray-900/50 px-6 py-16 text-center backdrop-blur-sm md:flex-row md:text-left lg:gap-16">
         <BackgroundBlobs />
 
         {/* Content Section */}
@@ -120,7 +120,7 @@ export default function Home() {
           <div className="flex flex-col gap-4 sm:flex-row sm:justify-center md:justify-start">
             <Button
               asChild
-              className="rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-transform hover:scale-105 hover:shadow-2xl"
+              className="rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-6 text-lg font-semibold text-white shadow-lg transition-transform hover:scale-105 hover:shadow-2xl"
             >
               <Link href="/editor">✨ Get Started Free</Link>
             </Button>
@@ -142,7 +142,7 @@ export default function Home() {
             alt="Resume Preview"
             width={500}
             height={600}
-            className="mx-auto rounded-xl shadow-2xl transition-transform hover:scale-105 md:mx-0"
+            className="mx-auto rounded-xl shadow-2xl transition-transform duration-200 ease-in-out hover:scale-105 md:mx-0"
           />
         </div>
       </main>

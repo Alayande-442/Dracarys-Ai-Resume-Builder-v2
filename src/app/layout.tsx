@@ -14,9 +14,7 @@ export const metadata: Metadata = {
   description:
     "Create a standout, professional resume in minutes with AI Resume Builder—your first step toward landing your dream job.",
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
+    icon: '/favicon.ico',
   },
 };
 
