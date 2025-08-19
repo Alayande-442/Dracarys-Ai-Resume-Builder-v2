@@ -86,9 +86,9 @@ export default function Home() {
   ];
 
   return (
-    <div className="relative bg-gray-900 text-white">
+    <div className="relative min-h-screen bg-gray-900 text-white overflow-hidden">
       {/* Hero Section */}
-      <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-transparent px-6 py-16 text-center md:flex-row md:text-left lg:gap-16">
+      <main className="relative flex min-h-screen flex-col items-center justify-center px-6 py-16 text-center md:flex-row md:text-left lg:gap-16 bg-gray-900/50 backdrop-blur-sm">
         <BackgroundBlobs />
 
         {/* Content Section */}
